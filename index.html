@@ -1,0 +1,191 @@
+<html>
+	<head>
+		<title> STUDENT LOGIN PAGE </title>
+		<link rel="stylesheet" type="text/css" href="CSS.css">
+		<script></script>
+	</head>
+
+	<script>
+	//changing the forms
+		function toggleForms()
+		{
+			var inputDisplay = document.getElementById("logintitle").style.display;
+			if (inputDisplay == "block")
+			{
+				document.getElementById("logintitle").style.display="none";
+				document.getElementById("regtitle").style.display="block";			
+			}
+			else 
+			{
+				document.getElementById("logintitle").style.display="block";
+				document.getElementById("regtitle").style.display="none";
+			}
+		}
+
+		function validateUsername(userName)
+		{
+			var userNameLength = userName.length;
+			if (userNameLength >= 10 && userNameLength <= 20)
+			{
+				var isLowerCase = false;
+				var isUpperCase = false;
+				var isNumeric = false;
+
+				for (var i=0;i<userNameLength;i++ )
+				{
+					var ch = userName.charCodeAt(i);
+					if (ch>=65 && ch<=90)
+					{
+						isUpperCase = true;
+					}
+					else if (ch >=48 && ch <= 57)
+					{
+						isNumeric = true;
+					}
+					else if (ch >= 97 && ch <= 122)
+					{
+						isLowerCase = true;
+					}
+					else
+					{
+						isUpperCase = false;	
+						break;
+					}
+				}
+				if (isLowerCase == true && isUpperCase == true && isNumeric == true)
+				{
+					return true;
+				} 
+				else
+				{
+					alert("Username should have Uppercase, Lowercase and Numbers");
+				}
+
+			}
+			else
+			{
+				alert("User Name must have 10 to 20 characters");
+			}
+		}
+
+		function validatePassword(password)
+		{
+			var passwordLength = password.length;
+			if ((passwordLength >= 6) && (passwordLength <= 10))
+			{
+				for (var i=0;i<passwordLength;i++)
+				{
+					var ch = password.charCodeAt(i);
+					if (ch >=48 && ch <= 57)
+					{
+						return true;
+						break;
+					}
+					else
+					{
+						alert("Password must contain only numbers");
+						break;
+					}
+				}
+
+			}
+			else
+			{
+				alert("Password length must be 6 to 10 characters");
+			}
+		}
+
+		function login()
+		{
+			var username = document.getElementById("loginusername").value;
+			var password = document.getElementById("loginpassword").value;
+			var usernameRes = validateUsername(username);
+			var passwordRes = validatePassword(password);
+			if (usernameRes == true && passwordRes == true)
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange=function() {
+				if (this.readyState == 4 && this.status == 200) {
+					alert(this.responseText);
+				}
+				}
+				xhttp.open("POST", "login?name="+ username +"&password="+ password, true);
+				xhttp.setRequestHeader("Access-Control-Allow-Methods", "POST");
+				xhttp.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+				xhttp.send();
+			}
+		}
+
+		function register()
+		{
+			var username = document.getElementById("regusername").value;
+			var password = document.getElementById("regpassword").value;
+			var usernameRes = validateUsername(username);
+			var passwordRes = validatePassword(password);
+			var rePassword = document.getElementById("repassword").value;
+			if (usernameRes == true && passwordRes == true)
+			{
+				if (password == rePassword)
+				{
+				
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange=function() {
+						if (this.readyState == 4 && this.status == 200) {	
+							if (this.responseText == "1"){
+								alert("Username already exists");
+							}
+							else if(this.responseText == "2"){
+								alert("Successfully inserted");
+							}
+							else {
+								alert("error is " + this.responseText);
+							}
+						}	
+					}
+					
+					xhttp.open("POST", "register?name="+ username +"&password="+ rePassword, true);
+					xhttp.setRequestHeader("Access-Control-Allow-Methods", "POST");
+					xhttp.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+					xhttp.send();
+				}
+				else
+				{
+					alert("Password Mismatch");
+				}
+			}
+		}
+	</script>
+	
+	<body>
+		<div id="main">
+			<div id="logintitle" class="toggle_forms" style="display:block;">
+						<p id="para" class="title">
+						STUDENT LOGIN
+						</p>
+				<div id="inputs" >
+					<input type="text" name="loginusername" id="loginusername" placeholder="Enter User Name"></br>
+					<input type="password" name="loginpassword" id="loginpassword" placeholder="Enter Password"></br>
+					<button id="loginbutton" onclick="login()">Log In</button></br>
+					<p id="newuser">New User click </p>
+					<button id="reg" onclick="toggleForms()">Register</button>
+				</div>
+			</div>
+
+			<div id="regtitle" class="toggle_forms" style="display:none;"> 
+						<p id="para1" class="title">
+						STUDENT REGISTRATION
+						</p>
+				<div id="regist">
+					<input type="text" name="regusername" id="regusername" placeholder="Enter a User Name"></br>
+					<div id="noteusername">*Username must be between 10 to 20 characters and </br>should have Uppercase, Lowercase and Numbers.</div>
+					<input type="password" name="regpassword" id="regpassword" placeholder="Enter New Password"></br>
+					<div id="notepassword">*Password must be between 6 to 10 characters and </br>numbers only allowed.</div>
+					<input type="password" name="newPassword" id="repassword" placeholder="Confirm New Password"></br>
+					<div id="noterepass">*Re-enter same password.</div>
+					<button id="reg_button"  onclick="register()">Submit</button></br>
+					<button id="backtologin" onclick="toggleForms()">Back to login</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

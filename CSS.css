@@ -1,0 +1,122 @@
+#main
+{
+	margin: auto;
+	height: auto;
+	width: 100%;
+	background-size : 100% 100%;
+	background-repeat : no-repeat; 
+}
+
+#regtitle
+{
+	position:absolute;
+	left:0px;
+	right:0px;
+	top:0px;
+    height: 94px;
+    background-color: #2C3E56;
+	color :white; 
+	font-size : 30px;
+}
+
+#logintitle
+{
+    height: 94px;
+    background-color: #2C3E56;
+    position:absolute;
+	left:0px;
+	right:0px;
+	top:0px;
+	color :white; 
+	font-size : 30px;
+}
+
+#inputs
+{
+	position : absolute;
+	margin-left:-57px;
+	top : 180px;
+}
+
+#regist
+{
+	position : absolute;
+	margin-left:-57px;
+	top : 133px;
+}
+
+input
+{
+	height : 38px;
+	width: 297px;
+	margin-top: 10px;
+	margin-left: 510px;
+}
+
+#loginbutton,#reg_button
+{
+	height : 50px;
+	width: 300px;
+	margin-top: 10px;
+	margin-left: 510px;
+	font-size: 15px;
+	font-weight : bold;
+	color : white;
+	background :#34496B;
+	border-color:#34496B;
+	border:none;
+}
+
+.title
+{
+	position : absolute;
+	top:-4px;
+	left: 20px;
+}
+
+#newuser
+{
+    margin-left: 569px;
+    font-size: 17px;
+    color: black;
+}
+
+#backtologin,#reg
+{
+    transition-duration: 0.3s;
+	font-weight:bolder;
+	background-color:transparent;
+	border-color:transparent;
+	color:blue;
+	border:none;
+}
+#reg:hover
+{
+	background :#3b5998;
+    color: white;
+}
+
+#backtologin:hover
+{
+	background :#3b5998;
+    color: white;
+}
+
+#reg
+{
+	margin-top:-35px;
+	margin-left:676px;
+}
+
+#backtologin
+{
+	margin-left:711px;
+	margin-top: 10px;
+}
+
+#noteusername,#notepassword,#noterepass
+{
+	font-size:13px;
+	margin-left:509px;
+	color:#fa4949;
+}
